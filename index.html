@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Westside Tech Solutions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        dark: {
+                            900: '#0a0a0a',
+                            800: '#1a1a1a',
+                            700: '#252525',
+                            600: '#333333',
+                        },
+                        accent: {
+                            500: '#5e60ce',
+                            400: '#80ffdb',
+                        }
+                    },
+                    fontFamily: {
+                        'space': ['Space Grotesk', 'sans-serif']
+                    },
+                    animation: {
+                        'bounce-slow': 'bounce 3s infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite'
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        html {
+            scroll-behavior: smooth;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        
+        body {
+            background-color: #0a0a0a;
+            color: #e5e5e5;
+            overflow-x: hidden;
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #80ffdb, #5e60ce);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .skill-progress {
+            transition: width 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .project-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .contact-input:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(94, 96, 206, 0.3);
+        }
+        
+        .glow {
+            box-shadow: 0 0 25px rgba(94, 96, 206, 0.15);
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(90deg, #80ffdb, #5e60ce);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero-pattern {
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(94, 96, 206, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 90% 70%, rgba(128, 255, 219, 0.1) 0%, transparent 20%);
+        }
+        
+        .typewriter {
+            position: relative;
+        }
+        
+        .typewriter::after {
+            content: "|";
+            animation: blink 1s infinite;
+            position: absolute;
+            right: -10px;
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        
+        .section-title:after {
+            content: "";
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #80ffdb, #5e60ce);
+            margin-top: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-content {
+                flex-direction: column;
+            }
+            
+            .hero-text {
+                order: 2;
+                text-align: center;
+            }
+            
+            .hero-image {
+                order: 1;
+                margin-bottom: 2rem;
+            }
+        }
+    </style>
+</head>
+<body class="bg-dark-900 text-gray-200">
+    <!-- Navigation -->
+    <header class="fixed w-full z-50">
+        <nav class="container mx-auto px-4 py-5 flex justify-between items-center">
+            <div>
+                <a href="#" class="text-2xl font-bold tracking-tight gradient-text">DEV<span class="text-white">CODE</span></a>
+            </div>
+            
+            <div class="hidden md:flex space-x-8">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#skills" class="nav-link">Services</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+            
+            <div class="flex items-center">
+                <button id="theme-switcher" class="p-2 rounded-full bg-dark-700 hover:bg-dark-600 transition">
+                    <i class="fas fa-sun text-yellow-300"></i>
+                </button>
+                <button class="md:hidden ml-4 text-xl">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center hero-pattern pt-20">
+        <div class="container mx-auto px-4 py-16 flex flex-wrap items-center justify-between hero-content">
+            <div class="hero-text w-full md:w-1/2">
+                <p class="text-accent-400 font-semibold mb-2 tracking-wider">HELLO, I'M</p>
+                <h1 class="text-5xl md:text-7xl font-bold mb-4">ALEX <span class="gradient-text">MORGAN</span></h1>
+                <div class="typewriter-container mb-6">
+                    <h2 class="text-3xl md:text-4xl font-semibold inline-block typewriter">Full Stack Developer</h2>
+                </div>
+                <p class="text-xl text-gray-400 mb-8 max-w-lg">We create scalable, performant applications that deliver exceptional user experiences no matter the size of your business.</p>
+                <div class="flex space-x-4">
+                    <a href="#projects" class="px-8 py-3 bg-accent-500 hover:bg-accent-600 rounded-full font-semibold transition transform hover:-translate-y-1">View My Work</a>
+                    <a href="#contact" class="px-8 py-3 border border-accent-500 hover:bg-accent-500/20 rounded-full font-semibold transition">Get in Touch</a>
+                </div>
+            </div>
+            
+            <div class="hero-image w-full md:w-1/2 flex justify-center">
+                <div class="relative">
+                    <div class="absolute w-72 h-72 bg-accent-500/10 rounded-full filter blur-2xl -z-10 animate-pulse-slow"></div>
+                    <div class="bg-gradient-to-br from-dark-700 to-dark-800 rounded-full p-1.5 glow">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" 
+                             class="w-72 h-72 object-cover rounded-full" 
+                             alt="Developer Portrait">
+                    </div>
+                    <div class="absolute bottom-6 -right-6 bg-accent-500 px-6 py-2 rounded-full text-dark-900 font-bold">
+                        <span>5+ Years</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-dark-800">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold section-title inline-block">About Me</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h3 class="text-2xl font-bold mb-4">Crafting Digital Solutions</h3>
+                    <p class="text-gray-400 mb-4 leading-relaxed">
+                        I'm a passionate software developer with expertise in creating modern, responsive web applications.
+                        With over 5 years of professional experience, I've helped startups and enterprises turn their ideas
+                        into scalable, efficient digital solutions.
+                    </p>
+                    <p class="text-gray-400 mb-6 leading-relaxed">
+                        My approach combines clean, maintainable code with intuitive user experiences. I specialize in 
+                        JavaScript ecosystems, cloud infrastructure, and performance optimization.
+                    </p>
+                    
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 rounded-full bg-accent-500/10 flex items-center justify-center mr-3">
+                                <i class="fas fa-university text-accent-400"></i>
+                            </div>
+                            <div>
+                                <p class="font-bold">Education</p>
+                                <p class="text-gray-400">MSc Computer Science</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 rounded-full bg-accent-500/10 flex items-center justify-center mr-3">
+                                <i class="fas fa-location-dot text-accent-400"></i>
+                            </div>
+                            <div>
+                                <p class="font-bold">Location</p>
+                                <p class="text-gray-400">San Francisco, CA</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 rounded-full bg-accent-500/10 flex items-center justify-center mr-3">
+                                <i class="fas fa-code text-accent-400"></i>
+                            </div>
+                            <div>
+                                <p class="font-bold">Specialization</p>
+                                <p class="text-gray-400">Full Stack Web</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 rounded-full bg-accent-500/10 flex items-center justify-center mr-3">
+                                <i class="fas fa-briefcase text-accent-400"></i>
+                            </div>
+                            <div>
+                                <p class="font-bold">Experience</p>
+                                <p class="text-gray-400">5+ Years</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-dark-700 rounded-2xl p-8 glow">
+                    <h3 class="text-2xl font-bold mb-6 text-center">Professional Journey</h3>
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <h4 class="font-bold">Senior Developer</h4>
+                                <span class="text-accent-400 font-semibold">2021 - Present</span>
+                            </div>
+                            <p class="text-gray-400 mb-2">TechCorp Solutions</p>
+                            <p class="text-gray-400 text-sm">
+                                Lead development on enterprise SaaS products using React, Node.js, and AWS infrastructure.
+                                Improved application performance by 40% and mentored junior developers.
+                            </p>
+                        </div>
+                        
+                        <div class="h-0.5 bg-dark-600 w-full"></div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <h4 class="font-bold">Full Stack Developer</h4>
+                                <span class="text-accent-400 font-semibold">2019 - 2021</span>
+                            </div>
+                            <p class="text-gray-400 mb-2">InnovateStart</p>
+                            <p class="text-gray-400 text-sm">
+                                Developed MVP applications for startups and contributed to product design decisions.
+                                Built REST APIs and managed deployment pipelines.
+                            </p>
+                        </div>
+                        
+                        <div class="h-0.5 bg-dark-600 w-full"></div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <h4 class="font-bold">Frontend Developer</h4>
+                                <span class="text-accent-400 font-semibold">2017 - 2019</span>
+                            </div>
+                            <p class="text-gray-400 mb-2">WebDesign Co.</p>
+                            <p class="text-gray-400 text-sm">
+                                Created responsive interfaces using HTML, CSS, and JavaScript. Collaborated with designers
+                                to implement UI/UX designs.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 gradient-bg">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold section-title inline-block">My Skills</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <div>
+                    <h3 class="text-2xl font-bold mb-6">Technical Expertise</h3>
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium">JavaScript/TypeScript</span>
+                                <span class="text-accent-400">95%</span>
+                            </div>
+                            <div class="h-3 bg-dark-700 rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-accent-400 to-accent-500 rounded-full skill-progress" style="width: 95%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium">React.js</span>
+                                <span class="text-accent-400">90%</span>
+                            </div>
+                            <div class="h-3 bg-dark-700 rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-accent-400 to-accent-500 rounded-full skill-progress" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium">Node.js</span>
+                                <span class="text-accent-400">88%</span>
+                            </div>
+                            <div class="h-3 bg-dark-700 rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-accent-400 to-accent-500 rounded-full skill-progress" style="width: 88%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium">HTML & CSS</span>
+                                <span class="text-accent-400">93%</span>
+                            </div>
+                            <div class="h-3 bg-dark-700 rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-accent-400 to-accent-500 rounded-full skill-progress" style="width: 93%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-2xl font-bold mb-6">Technologies I Use</h3>
+                    
+                    <div class="grid grid-cols-3 gap-4">
+                        <div class="bg-dark-800/50 rounded-xl p-5 flex flex-col items-center justify-center hover:glow transition">
+                            <i class="fab fa-react text-4xl mb-3 text-accent-400"></i>
+                            <span>React</span>
+                        </div>
+                        <div class="bg-dark-800/50 rounded-xl p-5 flex flex-col items-center justify-center hover:glow transition">
+                            <i class="fab fa-node-js text-4xl mb-3 text-accent-400"></i>
+                            <span>Node.js</span>
+                        </div>
+                        <div class="bg-dark-800/50 rounded-xl p-5 flex flex-col items-center justify-center hover:glow transition">
+                            <i class="fas fa-database text-4xl mb-3 text-accent-400"></i>
+                            <span>MongoDB</span>
+                        </div>
+                        <div class="bg-dark-800/50 rounded-xl p-5 flex flex-col items-center justify-center hover:glow transition">
+                            <i class="fab fa-aws text-4xl mb-3 text-accent-400"></i>
+                            <span>AWS</span>
+                        </div>
+                        <div class="bg-dark-800/50 rounded-xl p-5 flex flex-col items-center justify-center hover:glow transition">
+                            <i class="fab fa-docker text-4xl mb-3 text-accent-400"></i>
+                            <span>Docker</span>
+                        </div>
+                        <div class="bg-dark-800/50 rounded-xl p-5 flex flex-col items-center justify-center hover:glow transition">
+                            <i class="fab fa-git-alt text-4xl mb-3 text-accent-400"></i>
+                            <span>Git</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 bg-dark-800">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold section-title inline-block">Featured Projects</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="project-card bg-dark-700 rounded-xl overflow-hidden glow hover:glow-lg">
+                    <div class="h-48 bg-gradient-to-r from-purple-900 to-accent-900 flex items-center justify-center">
+                        <i class="fas fa-chart-line text-6xl text-accent-400"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-2">FinTech Dashboard</h3>
+                        <p class="text-gray-400 mb-4">
+                            A comprehensive financial analytics dashboard with real-time data visualization.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-5">
+                            <span class="px-3 py-1 bg-dark-600 rounded-full text-sm">React</span>
+                            <span class="px-3 py-1 bg-dark-600 rounded-full text-sm">D3.js</span>
+                            <span class="px-3 py-1 bg-dark-600 rounded-full text-sm">Node.js</span>
+                        </div>
+                        <a href="#" class="text-accent-400 hover:text-accent-300 font-semibold flex items-center">
+                            View Project <i class="fas fa-arrow-right ml-2 text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="project-card bg-dark-700 rounded-xl overflow-hidden glow hover:glow-lg">
+                    <div class="h-48 bg-gradient-to-r from-blue-900 to-accent-900 flex items-center justify-center">
+                        <i class="fas fa-shopping-cart text-6xl text-accent-400"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-2">E-Commerce Platform</h3>
+                        <p class="text-gray-400 mb-4">
+                            A full-featured online shopping solution with payment processing and inventory management.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-5">
+                            <span class="px-3 py-1 bg-dark-600 rounded-full text-sm">Next.js</span>
+                            <span class="px-3 py-1 bg-dark-600 rounded-full text-sm">Stripe</span>
+                            <span class="px-3 py-1 bg-dark-600 rounded-full text-sm">MongoDB</span>
+                        </div>
+                        <a href="#" class="text-accent-400 hover:text-accent-300 font-semibold flex items-center">
+                            View Project <i class="fas fa-arrow-right ml-2 text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="project-card bg-dark-700 rounded-xl overflow-hidden glow hover:glow-lg">
+                    <div class="h-48 bg-gradient-to-r from-green-900 to-accent-900 flex items-center justify-center">
+                        <i class="fas fa-users text-6xl text-accent-400"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-2">Team Collaboration App</h3>
+                        <p class="text-gray-400 mb-4">
+                            Real-time collaborative workspace with chat, file sharing, and project management tools.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-5">
+                            <span class="px-3 py-1 bg-dark-600 rounded-full text-sm">Vue.js</span>
+                            <span class="px-3 py-1 bg-dark-600 rounded-full text-sm">WebSockets</span>
+                            <span class="px-3 py-1 bg-dark-600 rounded-full text-sm">Firebase</span>
+                        </div>
+                        <a href="#" class="text-accent-400 hover:text-accent-300 font-semibold flex items-center">
+                            View Project <i class="fas fa-arrow-right ml-2 text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold section-title inline-block">Get In Touch</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div class="bg-dark-800 rounded-2xl p-8 glow">
+                    <h3 class="text-2xl font-bold mb-6">Let's Talk About Your Project</h3>
+                    <p class="text-gray-400 mb-8">
+                        Have a project in mind? Want to collaborate? Feel free to reach out. I'm always open to 
+                        discussing new projects, opportunities, or just a friendly chat about development.
+                    </p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 rounded-full bg-accent-500/10 flex items-center justify-center mr-4">
+                                <i class="fas fa-envelope text-accent-400"></i>
+                            </div>
+                            <div>
+                                <p class="font-bold">Email</p>
+                                <a href="mailto:hello@devcode.com" class="text-gray-400 hover:text-accent-400">hello@devcode.com</a>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 rounded-full bg-accent-500/10 flex items-center justify-center mr-4">
+                                <i class="fas fa-phone-alt text-accent-400"></i>
+                            </div>
+                            <div>
+                                <p class="font-bold">Phone</p>
+                                <a href="tel:+11234567890" class="text-gray-400 hover:text-accent-400">+1 (123) 456-7890</a>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 rounded-full bg-accent-500/10 flex items-center justify-center mr-4">
+                                <i class="fas fa-map-marker-alt text-accent-400"></i>
+                            </div>
+                            <div>
+                                <p class="font-bold">Location</p>
+                                <p class="text-gray-400">San Francisco, California</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex space-x-5 mt-8">
+                        <a href="#" class="w-10 h-10 rounded-full bg-dark-700 hover:bg-accent-500 flex items-center justify-center transition">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-dark-700 hover:bg-accent-500 flex items-center justify-center transition">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-dark-700 hover:bg-accent-500 flex items-center justify-center transition">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-dark-700 hover:bg-accent-500 flex items-center justify-center transition">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="bg-dark-800 rounded-2xl p-8 glow">
+                        <form>
+                            <div class="mb-5">
+                                <label for="name" class="block mb-2 font-medium">Name</label>
+                                <input type="text" id="name" class="w-full px-4 py-3 rounded-lg bg-dark-700 border border-dark-600 focus:border-accent-500 contact-input" placeholder="Your Name">
+                            </div>
+                            
+                            <div class="mb-5">
+                                <label for="email" class="block mb-2 font-medium">Email</label>
+                                <input type="email" id="email" class="w-full px-4 py-3 rounded-lg bg-dark-700 border border-dark-600 focus:border-accent-500 contact-input" placeholder="your.email@example.com">
+                            </div>
+                            
+                            <div class="mb-5">
+                                <label for="subject" class="block mb-2 font-medium">Subject</label>
+                                <input type="text" id="subject" class="w-full px-4 py-3 rounded-lg bg-dark-700 border border-dark-600 focus:border-accent-500 contact-input" placeholder="What is this regarding?">
+                            </div>
+                            
+                            <div class="mb-5">
+                                <label for="message" class="block mb-2 font-medium">Message</label>
+                                <textarea id="message" rows="5" class="w-full px-4 py-3 rounded-lg bg-dark-700 border border-dark-600 focus:border-accent-500 contact-input" placeholder="How can I help you?"></textarea>
+                            </div>
+                            
+                            <button type="submit" class="w-full py-3 px-6 bg-gradient-to-r from-accent-500 to-accent-600 hover:from-accent-600 hover:to-accent-700 rounded-lg font-semibold text-lg transition">
+                                Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 bg-dark-900 border-t border-dark-800">
+        <div class="container mx-auto px-4 text-center">
+            <a href="#" class="text-2xl font-bold tracking-tight gradient-text mb-4 inline-block">DEV<span class="text-white">CODE</span></a>
+            
+            <div class="flex justify-center space-x-6 mb-6">
+                <a href="#" class="text-gray-500 hover:text-accent-400"><i class="fab fa-github"></i></a>
+                <a href="#" class="text-gray-500 hover:text-accent-400"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" class="text-gray-500 hover:text-accent-400"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="text-gray-500 hover:text-accent-400"><i class="fab fa-instagram"></i></a>
+            </div>
+            
+            <p class="text-gray-600 text-sm">© 2023 DevCode. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <!-- Back to Top Button -->
+    <button id="topBtn" class="fixed bottom-8 right-8 w-12 h-12 bg-accent-500 hover:bg-accent-600 rounded-full flex items-center justify-center text-white shadow-lg transition opacity-0 invisible">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    <script>
+        // Theme switcher functionality
+        const themeSwitcher = document.getElementById('theme-switcher');
+        const themeIcon = themeSwitcher.querySelector('i');
+        
+        themeSwitcher.addEventListener('click', function() {
+            document.documentElement.classList.toggle('dark');
+            if (document.documentElement.classList.contains('dark')) {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            } else {
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+            }
+        });
+        
+        // Back to top button functionality
+        const topButton = document.getElementById('topBtn');
+        
+        window.onscroll = function() {
+            if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
+                topButton.classList.remove('opacity-0', 'invisible');
+                topButton.classList.add('opacity-100');
+            } else {
+                topButton.classList.add('opacity-0', 'invisible');
+                topButton.classList.remove('opacity-100');
+            }
+        };
+        
+        topButton.addEventListener('click', function() {
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        });
+        
+        // Navigation link active state
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-link');
+        
+        window.addEventListener('scroll', () => {
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (scrollY >= (sectionTop - sectionHeight / 3)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('text-accent-400');
+                if (link.getAttribute('href').substring(1) === current) {
+                    link.classList.add('text-accent-400');
+                }
+            });
+        });
+        
+        // Animations when scrolling to elements
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    if (entry.target.classList.contains('skill-progress')) {
+                        entry.target.style.width = entry.target.style.width;
+                    }
+                    if (entry.target.classList.contains('hero-image')) {
+                        entry.target.classList.add('animate__fadeInRight');
+                    }
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.skill-progress').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
